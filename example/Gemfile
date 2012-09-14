@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+
+gem 'rails', '3.2.8'
+
+gem 'filepickerio_rails', :path => '../'
+
+gem 'sqlite3'

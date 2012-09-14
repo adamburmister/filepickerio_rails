@@ -1,0 +1,25 @@
+# -*- encoding: utf-8 -*-
+$:.push File.expand_path("../lib", __FILE__)
+require "filepickerio_rails/version"
+
+Gem::Specification.new do |s|
+  s.name        = "filepickerio_rails"
+  s.version     = FilepickerioRails::VERSION
+  s.authors     = ["Adam Burmister"]
+  s.email       = ["adam.burmister@gmail.com"]
+  s.homepage    = ""
+  s.summary     = %q{Rails view helpers for Filepicker.io widgets}
+  s.description = %q{Rails view helpers for Filepicker.io widgets}
+
+  s.rubyforge_project = "filepickerio_rails"
+
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.require_paths = ["lib"]
+
+  # specify any dependencies here; for example:
+  s.add_development_dependency "rspec"
+  s.add_development_dependency "rails"
+  # s.add_runtime_dependency "rest-client"
+end

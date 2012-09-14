@@ -1,0 +1,16 @@
+# encoding: utf-8
+
+require 'action_view'
+require 'action_view/template'
+
+require 'filepickerio_rails/action_view/form_helper'
+
+module FormHelpers
+  include ActionView::Helpers::FormHelper
+  include ActionView::Context
+  include ActionController::RecordIdentifier
+
+  def protect_against_forgery?
+    false
+  end
+end
