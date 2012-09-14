@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module FilepickerioRails
   class FormBuilder < ::ActionView::Helpers::FormBuilder
     # Returns a input tag tailored for a Filepicker.io upload widget to be attached for the form object
