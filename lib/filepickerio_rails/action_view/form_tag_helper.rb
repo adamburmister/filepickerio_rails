@@ -88,6 +88,11 @@ module FilepickerioRails
           } 
         }.deep_merge(options)
 
+        # Convert services array into string
+        if options[:data]['fp-option-services'].is_a? Array
+          options[:data]['fp-option-services'] = options[:data]['fp-option-services'].join(',')
+        end
+
         button_tag(content || 'Save file', options, &block)
       end
 

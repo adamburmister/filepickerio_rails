@@ -21,6 +21,10 @@ Include the filepicker.io JavaScript library in your page (such as your applicat
 Render a Filepicker.io file upload and save fields using the form tag helper:
 
     <%= fp_file_tag :user, 'Pick file', 'http://example.com/existing-upload.jpg' %>
+    <%= fp_file_tag :user, 'Pick file', 'http://example.com/existing-upload.jpg', 'image/jpg' %>
+    <%= fp_file_tag :user, 'Pick file', 'http://example.com/existing-upload.jpg', 'image/jpg', { class: 'primary btn' } %>
+
+    <%= fp_save_button 'Save to Dropbox', 'http://www.filepicker.io/static/img/success.png', 'image/jpg' %>
     <%= fp_save_button 'Save to Dropbox', 'http://www.filepicker.io/static/img/success.png', 'image/jpg', data: { 'fp-option-services' => 'DROPBOX' } %>
 
 Or use the data-bound form builder methods, fp_file, fp_save:
