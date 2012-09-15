@@ -11,7 +11,7 @@ module FilepickerioRails
     #
     module FormTagHelper
 
-      def filepickerio_upload_tag(object_name, text=nil, value=nil, options={})
+      def fp_file_tag(object_name, text=nil, value=nil, options={})
         dragdrop = options[:dragdrop] && options[:dragdrop] == true
         input_type = (dragdrop ? 'filepicker-dragdrop' : 'filepicker')
 
@@ -26,7 +26,7 @@ module FilepickerioRails
         text_field_tag(object_name, value, options.deep_merge(filepickerio_options).stringify_keys)
       end
 
-      def filepickerio_save_button_tag(content_or_options=nil, url=nil, mime=nil, options=nil, &block)
+      def fp_save_tag(content_or_options=nil, url=nil, mime=nil, options=nil, &block)
         raise "URL of file to be saved must be set" if url.nil?
         raise "Mime type of file to be saved must be set" if mime.nil?
 
