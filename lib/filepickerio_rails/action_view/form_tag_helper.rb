@@ -43,40 +43,52 @@ module FilepickerioRails
           'filepicker'
         end
 
-        filepickerio_options = { 
+        options = { 
           type: input_type,
           size: nil,
           data: {
             "fp-apikey" => fp_api_key,
             "fp-button-text" => text || 'Pick File'
           }
-        }
-        options.deep_merge!(filepickerio_options)
+        }.deep_merge(options)
 
         ::ActionView::Helpers::InstanceTag.new(object_name, method, self, options.delete(:object)).to_input_field_tag(input_type, options)
       end
 
-      def fp_save_tag(content_or_options=nil, url=nil, mime=nil, options=nil, &block)
+      def fp_save_button_tag(content=nil, url=nil, mime=nil, options=nil, &block)
         raise "URL of file to be saved must be set" if url.nil?
-        raise "Mime type of file to be saved must be set" if mime.nil?
 
-        options = content_or_options if block_given? && content_or_options.is_a?(Hash)
-        options ||= {}
-        options = options.stringify_keys
+        options.deep_merge!({ 
+            data: {
+              "fp-url" => url
+            } 
+          })
 
-        filepickerio_options = { 
-          data: {
-            "fp-apikey" => fp_api_key,
-            "fp-url" => url,
-            "fp-mimetype" => mime
-          } 
-        }
-
-        button_tag(content_or_options || 'Save file', options.deep_merge(filepickerio_options), &block)
+        fp_save_button(nil, nil, content, mime, options, &block)
       end
 
-      def fp_save(object_name, method, content_or_options=nil, url=nil, mime=nil, options=nil, &block)
-        
+      def fp_save_button(object, method, content=nil, mime=nil, options={}, &block)
+        raise "Mime type of file to be saved must be set" if mime.nil?
+
+        value = options[:value]
+        if object && method
+          if !value
+            value = options.fetch(:value){ ::ActionView::Helpers::InstanceTag::value_before_type_cast(object, method.to_s) }
+            value &&= ERB::Util.html_escape(value)
+          end
+        end
+
+        options = { 
+          name: nil,
+          type: nil,
+          data: {
+            "fp-apikey" => fp_api_key,
+            "fp-mimetype" => mime,
+            "fp-url" => value
+          } 
+        }.deep_merge(options)
+
+        button_tag(content || 'Save file', options, &block)
       end
 
     private

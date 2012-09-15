@@ -27,7 +27,10 @@
 <h3>Filepicker.io save button</h3>
 <p>Filepicker.io allows you to define a button which when clicked saves the button's value (a URL) to your computer or web storage service (via Filepicker.io).</p>
 
-<%= fp_save_tag "Save to Dropbox", "http://www.filepicker.io/static/img/success.png", "image/jpg", data: { "fp-option-services" => "DROPBOX" } %>
+<p>
+  Renders: <code><%= CGI.unescapeHTML fp_save_button_tag "Save to Dropbox", "http://www.filepicker.io/static/img/success.png", "image/jpg", data: { "fp-option-services" => "DROPBOX", 'fp-url' => 'foobar' } %></code>
+</p>
+<%= fp_save_button_tag "Save to Dropbox", "http://www.filepicker.io/static/img/success.png", "image/jpg", data: { "fp-option-services" => "DROPBOX" } %>
 
 <h2>Form Builder methods</h2>
 
@@ -42,4 +45,13 @@
     <%= f.fp_file :image_url, "Select file" %>
   </p>
 
+  <p>
+    <code>&lt;%= f.fp_save_button :image_url, "Save file to cloud", 'image/jpg' %&gt;</code>
+  </p>
+  <p>
+    Renders: <code><%= CGI.unescapeHTML f.fp_save_button :image_url, "Save file to cloud", 'image/jpg' %></code>
+  </p>
+  <p>
+    <%= f.fp_save_button :image_url, "Save file to cloud", 'image/jpg' %>
+  </p>
 <%- end %>
