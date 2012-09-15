@@ -27,7 +27,7 @@ Render a Filepicker.io file upload and save fields using the form tag helper:
     <%= fp_save_button 'Save to Dropbox', 'http://www.filepicker.io/static/img/success.png', 'image/jpg' %>
     <%= fp_save_button 'Save to Dropbox', 'http://www.filepicker.io/static/img/success.png', 'image/jpg', data: { 'fp-option-services' => 'DROPBOX' } %>
 
-Or use the data-bound form builder methods, fp_file, fp_save:
+Or use the data-bound form builder methods, fp_file, fp_save_button:
 
     <%= form_for @entry do |f| %>
       <%= f.fp_file :image_url %>
@@ -35,3 +35,10 @@ Or use the data-bound form builder methods, fp_file, fp_save:
 
       <%= f.fp_save_button :image_url, "Save existing image to cloud", 'image/jpg' %>
     <%- end %>
+
+Filepicker.io Data Params
+-------------------------
+
+Pass a data hash as the last parameter to the helper methods to control the Filepicker.io widget.
+
+See the documentation at [https://developers.filepicker.io/docs/web/](https://developers.filepicker.io/docs/web/)

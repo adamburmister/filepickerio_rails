@@ -35,23 +35,35 @@
 <h2>Form Builder methods</h2>
 
 <%= form_for @entry do |f| %>
+  
+  <%
+  s = %q{f.fp_file :image_url, "Select file", data: { 'fp-mimetype' => 'image/jpg' }}
+  field = capture { eval s }
+  %>
   <p>
-    <code>&lt;%= f.fp_file :image_url, "Select file" %&gt;</code>
+    <code><%= raw "&lt;%= #{s} %&gt;" %></code>
   </p>
   <p>
-    Renders: <code><%= CGI.unescapeHTML f.fp_file :image_url, "Select file" %></code>
+    Renders: <code><%= CGI.unescapeHTML field %></code>
   </p>
   <p>
-    <%= f.fp_file :image_url, "Select file" %>
+    <%= field %>
   </p>
 
+  <%
+  s = %q{f.fp_save_button :image_url, "Save file to cloud", 'image/jpg'}
+  field = capture { eval s }
+  %>
   <p>
-    <code>&lt;%= f.fp_save_button :image_url, "Save file to cloud", 'image/jpg' %&gt;</code>
+    <code><%= raw "&lt;%= #{s} %&gt;" %></code>
   </p>
   <p>
-    Renders: <code><%= CGI.unescapeHTML f.fp_save_button :image_url, "Save file to cloud", 'image/jpg' %></code>
+    Renders: <code><%= CGI.unescapeHTML field %></code>
   </p>
   <p>
-    <%= f.fp_save_button :image_url, "Save file to cloud", 'image/jpg' %>
+    <%= field %>
   </p>
+
+
+  <%= f.submit %>
 <%- end %>

@@ -1,6 +1,6 @@
 Example::Application.routes.draw do
 
   resources :entries
-  root :to => 'images#index'
+  root :to => 'entries#index'
 
 end
