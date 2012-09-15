@@ -1,7 +1,7 @@
 require 'action_view'
 require 'action_view/template'
 
-require 'filepickerio_rails/action_view/form_helper'
+require 'filepickerio_rails/action_view/form_tag_helper'
 
 module FormHelpers
   include ActionView::Helpers::FormHelper

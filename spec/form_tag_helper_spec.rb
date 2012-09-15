@@ -1,25 +1,22 @@
 require 'spec_helper'
 
-describe FilepickerioRails::ActionView::FormHelper do
+describe FilepickerioRails::ActionView::FormTagHelper do
   describe "#filepickerio_save_button" do
     pending
   end
 
-  describe "#filepickerio_field_tag" do
+  describe "#filepickerio_upload_tag" do
+    context "field" do
+      let :template do
+        <<-EOTEMPLATE
+          <%= filepickerio_upload_tag :entry, "Pick file to upload", 'value.jpg', class: 'btn' %>
+        EOTEMPLATE
+      end
 
-    context "form field" do
-      # let :template do
-      #   <<-EOTEMPLATE
-      #     <%= form_for(user) do |f| %>
-      #        <%= f.filepickerio_field(:avatar) %>
-      #     <%- end -%>
-      #   EOTEMPLATE
-      # end
-
-      # it "should render successfuly" do
-      #   render(inline: template, locals: { user: user })
-      #   rendered.should_not be_nil
-      # end
+      it "should render successfuly" do
+        render(inline: template)
+        rendered.should_not be_nil
+      end
 
       # it "should have a type of filepickerio" do
       #   render(inline: template, locals: { user: user })

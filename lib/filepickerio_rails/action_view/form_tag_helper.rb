@@ -1,6 +1,6 @@
 module FilepickerioRails
-
   module ActionView
+
     # This module creates filepicker.io fields
     #
     # Examples:
@@ -18,7 +18,7 @@ module FilepickerioRails
         filepickerio_options = { 
           type: input_type,
           data: {
-            "fp-apikey" => filepickerio_api_key,
+            "fp-apikey" => fp_api_key,
             "fp-button-text" => text || 'Pick File'
           }
         }
@@ -36,7 +36,7 @@ module FilepickerioRails
 
         filepickerio_options = { 
           data: {
-            "fp-apikey" => filepickerio_api_key,
+            "fp-apikey" => fp_api_key,
             "fp-url" => url,
             "fp-mimetype" => mime
           } 
@@ -45,11 +45,13 @@ module FilepickerioRails
         button_tag(content_or_options || 'Save file', options.deep_merge(filepickerio_options), &block)
       end
 
-      private
+    private
 
-        def filepickerio_api_key
-          "APOleFxLDSRibUgG3tdqvz"
-        end
+      def fp_api_key
+        raise "Filepicker.io API Key not set. Check config/initializer/filepickerio_rails.rb" if !FilepickerioRails.config.api_key
+        FilepickerioRails.config.api_key
+      end
+
     end
   end
 end
