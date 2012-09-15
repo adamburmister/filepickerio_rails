@@ -14,6 +14,10 @@ Include the filepicker.io javascript in your page
 
     <%= javascript_include_tag "//api.filepicker.io/v0/filepicker.js" %>
 
+... or, if you're not using the asset pipeline, you can use the expansion:
+
+    <%= javascript_include_tag :filepickerio %>
+
 Render Filepicker.io file upload and save fields using the view helper:
 
     <%= filepickerio_upload_tag :user, 'Pick file', 'http://example.com/existing-upload.jpg' %>

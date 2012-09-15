@@ -3,8 +3,14 @@
 <head>
   <title>Example</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag "//api.filepicker.io/v0/filepicker.js" %>
+  
+  <%= javascript_include_tag "application",  "//api.filepicker.io/v0/filepicker.js" %>
+
+  <%# If you're not using the asset pipeline you can use the following expansion 
+    # instead of the full URL
+    # %>
+  <%#= javascript_include_tag :filepickerio %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
