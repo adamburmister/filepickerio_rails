@@ -7,13 +7,15 @@ Gem::Specification.new do |s|
   s.version     = FilepickerioRails::VERSION
   s.authors     = ["Adam Burmister"]
   s.email       = ["adam.burmister@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "http://adamburmister.github.com/filepickerio_rails/"
   s.summary     = %q{Rails view helpers for Filepicker.io widgets}
   s.description = %q{Rails view helpers for Filepicker.io widgets}
 
   s.rubyforge_project = "filepickerio_rails"
 
   s.files         = `git ls-files`.split("\n")
+  s.files.reject! { |fn| fn.include? "example" } # don't include our example rails project which is just for testing
+
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]

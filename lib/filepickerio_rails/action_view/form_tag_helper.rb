@@ -11,7 +11,7 @@ module FilepickerioRails
     #
     module FormTagHelper
 
-      def fp_file_tag(object_name, text_or_options=nil, value_or_options=nil, options={})
+      def fp_file_field_tag(object_name, text_or_options=nil, value_or_options=nil, options={})
         # Allow users to pass in variable length arguments
         if text_or_options.is_a? Hash
           text = value = nil
@@ -31,10 +31,10 @@ module FilepickerioRails
           value: value
         )
 
-        fp_file(object_name, nil, text, options)
+        fp_file_field(object_name, nil, text, options)
       end
 
-      def fp_file(object_name, method, text, options)
+      def fp_file_field(object_name, method, text, options)
         dragdrop = options[:dragdrop] && options[:dragdrop] == true
 
         input_type = if dragdrop
