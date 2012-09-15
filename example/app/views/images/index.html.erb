@@ -5,14 +5,24 @@
 
 <h3>Filepicker.io upload inputs</h3>
 <h4>Basic</h4>
-<div>
+
+<p>
+  <code>&lt;%= fp_file_tag :entry, "Pick file to upload", 'value.jpg', class: 'btn' %&gt;</code>
+</p>
+<p>Renders: <code><%= CGI.unescapeHTML fp_file_tag :entry, "Pick file to upload", 'value.jpg', class: 'btn' %></code></p>
+
+<p>
 	<%= fp_file_tag :entry, "Pick file to upload", 'value.jpg', class: 'btn' %>
-</div>
-<p>Which renders:</p>
-<code><%= CGI.unescapeHTML fp_file_tag :entry, "Pick file to upload", 'value.jpg', class: 'btn' %></code>
+</p>
 
 <h4>With drag-n-drop</h4>
-<%= fp_file_tag :entry, nil, nil, dragdrop: true %>
+
+<p>
+  <code>&lt;%= fp_file_tag :entry, dragdrop: true %&gt;</code>
+</p>
+<p>Renders: <code><%= CGI.unescapeHTML fp_file_tag :entry, dragdrop: true %></code></p>
+
+<%= fp_file_tag :entry, dragdrop: true %>
 
 <h3>Filepicker.io save button</h3>
 <p>Filepicker.io allows you to define a button which when clicked saves the button's value (a URL) to your computer or web storage service (via Filepicker.io).</p>
@@ -22,5 +32,14 @@
 <h2>Form Builder methods</h2>
 
 <%= form_for @entry do |f| %>
-  <%= f.fp_file :image_url, "Select file" %>
+  <p>
+    <code>&lt;%= f.fp_file :image_url, "Select file" %&gt;</code>
+  </p>
+  <p>
+    Renders: <code><%= CGI.unescapeHTML f.fp_file :image_url, "Select file" %></code>
+  </p>
+  <p>
+    <%= f.fp_file :image_url, "Select file" %>
+  </p>
+
 <%- end %>

@@ -11,19 +11,49 @@ module FilepickerioRails
     #
     module FormTagHelper
 
-      def fp_file_tag(object_name, text=nil, value=nil, options={})
+      def fp_file_tag(object_name, text_or_options=nil, value_or_options=nil, options={})
+        if text_or_options.is_a? Hash
+          text = value = nil
+          options = text_or_options
+        elsif value_or_options.is_a? Hash
+          value = nil
+          options = value_or_options
+        else
+          text = text_or_options
+          value = value_or_options
+        end
+
+        options.merge!(
+          # This avoids the ActiveModel naming of `object_name[method]`
+          id: object_name,
+          name: object_name,
+          value: value
+        )
+
+        fp_file(object_name, nil, text, options)
+      end
+
+      def fp_file(object_name, method, text, options)
         dragdrop = options[:dragdrop] && options[:dragdrop] == true
-        input_type = (dragdrop ? 'filepicker-dragdrop' : 'filepicker')
+
+        input_type = if dragdrop
+          options.delete(:dragdrop)
+          'filepicker-dragdrop'
+        else
+          'filepicker'
+        end
 
         filepickerio_options = { 
           type: input_type,
+          size: nil,
           data: {
             "fp-apikey" => fp_api_key,
             "fp-button-text" => text || 'Pick File'
           }
         }
+        options.deep_merge!(filepickerio_options)
 
-        text_field_tag(object_name, value, options.deep_merge(filepickerio_options).stringify_keys)
+        ::ActionView::Helpers::InstanceTag.new(object_name, method, self, options.delete(:object)).to_input_field_tag(input_type, options)
       end
 
       def fp_save_tag(content_or_options=nil, url=nil, mime=nil, options=nil, &block)
@@ -43,6 +73,10 @@ module FilepickerioRails
         }
 
         button_tag(content_or_options || 'Save file', options.deep_merge(filepickerio_options), &block)
+      end
+
+      def fp_save(object_name, method, content_or_options=nil, url=nil, mime=nil, options=nil, &block)
+        
       end
 
     private
