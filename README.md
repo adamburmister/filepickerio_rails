@@ -20,9 +20,9 @@ Include the filepicker.io JavaScript library in your page (such as your applicat
 
 Render a Filepicker.io file upload and save fields using the form tag helper:
 
-    <%= fp_file_tag :user, 'Pick file', 'http://example.com/existing-upload.jpg' %>
-    <%= fp_file_tag :user, 'Pick file', 'http://example.com/existing-upload.jpg', 'image/jpg' %>
-    <%= fp_file_tag :user, 'Pick file', 'http://example.com/existing-upload.jpg', 'image/jpg', { class: 'primary btn' } %>
+    <%= fp_file_tag :image_url, 'Pick file', 'http://example.com/existing-upload.jpg' %>
+    <%= fp_file_tag :image_url, 'Pick file', 'http://example.com/existing-upload.jpg', 'image/jpg' %>
+    <%= fp_file_tag :image_url, 'Pick file', 'http://example.com/existing-upload.jpg', 'image/jpg', { class: 'primary btn' } %>
 
     <%= fp_save_button 'Save to Dropbox', 'http://www.filepicker.io/static/img/success.png', 'image/jpg' %>
     <%= fp_save_button 'Save to Dropbox', 'http://www.filepicker.io/static/img/success.png', 'image/jpg', data: { 'fp-option-services' => 'DROPBOX' } %>
@@ -30,5 +30,8 @@ Render a Filepicker.io file upload and save fields using the form tag helper:
 Or use the data-bound form builder methods, fp_file, fp_save:
 
     <%= form_for @entry do |f| %>
-      <%= f.fp_upload :image %>
+      <%= f.fp_file :image_url %>
+      <%= f.fp_file :lolcat_image_url, "Upload lolcat" %>
+
+      <%= f.fp_save_button :image_url, "Save existing image to cloud", 'image/jpg' %>
     <%- end %>

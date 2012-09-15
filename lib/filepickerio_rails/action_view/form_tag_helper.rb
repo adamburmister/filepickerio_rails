@@ -12,6 +12,7 @@ module FilepickerioRails
     module FormTagHelper
 
       def fp_file_tag(object_name, text_or_options=nil, value_or_options=nil, options={})
+        # Allow users to pass in variable length arguments
         if text_or_options.is_a? Hash
           text = value = nil
           options = text_or_options
