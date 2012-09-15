@@ -5,26 +5,31 @@ module FilepickerioRails
     #
     # Example:
     #
-    #     filepickerio_upload_tag :user, nil, data: { "fp-mimetypes": "image/jpg" }
+    #     filepickerio_upload_tag :user, 'Pick file', 'http://example.com/existing-upload.jpg', data: { "fp-mimetypes": "image/jpg" }
     #
     module FormHelper
-      def filepickerio_upload_tag(name, value=nil, options = {})
+      def filepickerio_upload_tag(object_name, text=nil, value=nil, options={})
         if options[:dragdrop] && options[:dragdrop] == true
           type = 'filepicker-dragdrop'
         else
           type = 'filepicker'
         end
 
-        options.merge!({ data:{} }) if !options[:data]
+        # Add the data hash
+        options = { 
+          type: type,
+          data: {}
+        }.merge(options)
+
         options[:data].merge!({
-          "fp-apikey" => "APOleFxLDSRibUgG3tdqvz"
+          "fp-apikey" => "APOleFxLDSRibUgG3tdqvz",
+          "fp-button-text" => text || 'Pick File'
         })
 
-        # TODO: Modify this to make it Filepicker.io-widget-compatible
-        text_field_tag(name, value, options.stringify_keys.update("type" => "filepickerio"))
+        hidden_field(object_name, value, options.stringify_keys)
       end
 
-      def filepickerio_save_button(content_or_options = nil, url = nil, mime = nil, options = nil, &block)
+      def filepickerio_save_button(text = nil, url = nil, mime = nil, options = nil, &block)
         raise "URL of file to be saved must be set" if url.nil?
         raise "Mime type of file to be saved must be set" if mime.nil?
 
@@ -35,7 +40,7 @@ module FilepickerioRails
           "fp-mimetype" => mime
         })
 
-        button_tag(content_or_options, options, &block)
+        button_tag(text, options, &block)
       end
     end
   end
