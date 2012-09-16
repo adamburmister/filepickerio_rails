@@ -85,10 +85,10 @@ module FilepickerioRails
             value &&= ERB::Util.html_escape(value)
           end
         end
-
+        
         options = { 
           name: nil,
-          type: nil,
+          type: 'button',
           data: {
             "fp-apikey" => fp_api_key,
             "fp-mimetype" => mime,
