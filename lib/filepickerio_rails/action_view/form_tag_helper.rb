@@ -34,7 +34,14 @@ module FilepickerioRails
         fp_file_field(object_name, nil, text, options)
       end
 
-      def fp_file_field(object_name, method, text, options)
+      def fp_file_field(object_name, method, text_or_options, options)
+        if text_or_options.is_a? Hash
+          text = nil
+          options = text_or_options
+        else
+          text = text_or_options
+        end
+
         dragdrop = options[:dragdrop] && options[:dragdrop] == true
 
         input_type = if dragdrop
@@ -100,7 +107,7 @@ module FilepickerioRails
     private
 
       def fp_api_key
-        raise "Filepicker.io API Key not set. Check config/initializer/filepickerio_rails.rb" if !FilepickerioRails.config.api_key
+        raise "Filepicker.io API Key not set" if !FilepickerioRails.config.api_key
         FilepickerioRails.config.api_key
       end
 

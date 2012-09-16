@@ -37,6 +37,21 @@
 <%= form_for @entry do |f| %>
   
   <%
+  s = %q{f.fp_file_field :image_url, :onchange => "console.log(this,arguments)"}
+  field = capture { eval s }
+  %>
+  <p>
+    <code><%= raw "&lt;%= #{s} %&gt;" %></code>
+  </p>
+  <p>
+    Renders: <code><%= CGI.unescapeHTML field %></code>
+  </p>
+  <p>
+    <%= field %>
+  </p>
+
+
+  <%
   s = %q{f.fp_file_field :image_url, "Select file", data: { 'fp-mimetypes' => 'image/jpeg' }}
   field = capture { eval s }
   %>
