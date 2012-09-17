@@ -14,15 +14,20 @@ module FilepickerioRails
       def fp_file_field_tag(object_name, text_or_options=nil, value_or_options=nil, options={})
         # Allow users to pass in variable length arguments
         if text_or_options.is_a? Hash
-          text = value = nil
+          # Nothing passed but options
+          text = nil
+          value = nil
           options = text_or_options
         elsif value_or_options.is_a? Hash
-          value = nil
+          # only text and options
           text = text_or_options
+          value = nil
           options = value_or_options
         else
+          # full params
           text = text_or_options
           value = value_or_options
+          # options = options
         end
 
         options.merge!(
