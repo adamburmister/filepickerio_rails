@@ -18,6 +18,7 @@ module FilepickerioRails
           options = text_or_options
         elsif value_or_options.is_a? Hash
           value = nil
+          text = text_or_options
           options = value_or_options
         else
           text = text_or_options
@@ -85,7 +86,7 @@ module FilepickerioRails
             value &&= ERB::Util.html_escape(value)
           end
         end
-        
+
         options = { 
           name: nil,
           type: 'button',
